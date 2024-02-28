@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/spacing_16"
+    android:paddingTop="@dimen/spacing_8"
+    android:paddingRight="@dimen/spacing_16"
+    android:paddingBottom="@dimen/spacing_8">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expense"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/text_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bayar Parkir"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/text_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-Rp 2.000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+</androidx.appcompat.widget.LinearLayoutCompat>
