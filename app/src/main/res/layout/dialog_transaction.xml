@@ -39,10 +39,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Transaction">
+            android:hint="Category">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/auto_transaction"
+                android:id="@+id/auto_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -53,10 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_8"
-            android:hint="Category">
+            android:hint="Transaction">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/auto_category"
+                android:id="@+id/auto_transaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />

@@ -5,12 +5,6 @@ import androidx.room.*
 @Dao
 interface SavingsDao {
 
-    @Query("SELECT * FROM table_savings WHERE userEmail = :email")
-    suspend fun getAllSavings(email: String): List<Savings>
-
-    @Query("SELECT * FROM table_savings WHERE userEmail = :email")
-    suspend fun getByUserEmail(email: String): List<Savings>
-
     @Update
     suspend fun updateSavings(savings: Savings)
 
@@ -24,7 +18,10 @@ interface SavingsDao {
     suspend fun updateAmount(email: String, type: String, amount: Int)
 
     @Query("SELECT * FROM table_savings WHERE userEmail = :email AND amount > 0")
-    suspend fun getPositiveSavings(email: String): List<Savings>
+    suspend fun getExpanse(email: String): List<Savings>
+
+    @Query("SELECT * FROM table_savings WHERE userEmail = :email")
+    suspend fun getIncome(email: String): List<Savings>
 
     @Query("UPDATE table_savings SET amount = amount - :expenseAmount WHERE userEmail = :userEmail AND type = 'Wallet'")
     suspend fun updateWalletExpenseSavings(userEmail: String, expenseAmount: Int)

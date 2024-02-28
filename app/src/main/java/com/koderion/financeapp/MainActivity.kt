@@ -78,35 +78,36 @@ class MainActivity : AppCompatActivity() {
             lp.width = WindowManager.LayoutParams.MATCH_PARENT
             lp.height = WindowManager.LayoutParams.WRAP_CONTENT
 
-            val scope = CoroutineScope(Dispatchers.IO)
-            scope.launch {
-                val savingsDao = AppDatabase.getInstance(applicationContext).savingDao()
-
-                val savingsTypes = savingsDao.getPositiveSavings(email).map { it.type }.distinct()
-
-                withContext(Dispatchers.Main) {
-                    val savingsTypeAdapter = ArrayAdapter(
-                        applicationContext,
-                        android.R.layout.simple_list_item_1,
-                        savingsTypes
-                    )
-                    dialogBinding.autoTransaction.setAdapter(savingsTypeAdapter)
-                }
-            }
-            dialogBinding.autoTransaction.setOnItemClickListener { parent, _, position, _ ->
-                transactionSelected = parent.getItemAtPosition(position) as String
-
-            }
-
             val transactionTypes = listOf("Expense", "Income")
             val transactionTypeAdapter =
                 ArrayAdapter(this, android.R.layout.simple_list_item_1, transactionTypes)
             dialogBinding.autoCategory.setAdapter(transactionTypeAdapter)
 
             dialogBinding.autoCategory.setOnItemClickListener { parent, _, position, _ ->
-                categorySelected = parent.getItemAtPosition(position) as String
+                categorySelected = parent.getItemAtPosition(position).toString()
+
+                val scope = CoroutineScope(Dispatchers.IO)
+                scope.launch {
+                    val savingsDao = AppDatabase.getInstance(applicationContext).savingDao()
+
+                    val savings: List<String> = when (categorySelected) {
+                        "Expense" -> savingsDao.getExpanse(email).map { it.type }.distinct()
+                        "Income" -> savingsDao.getIncome(email).map { it.type }.distinct()
+                        else -> emptyList() // Default to empty list for unknown category
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        val savingsTypeAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, savings)
+                        dialogBinding.autoTransaction.setAdapter(savingsTypeAdapter)
+                    }
+                }
+            }
+
+            dialogBinding.autoTransaction.setOnItemClickListener { parent, _, position, _ ->
+                transactionSelected = parent.getItemAtPosition(position).toString()
 
             }
+
             dialogBinding.inputDate.setOnClickListener {
                 val newCalendar = Calendar.getInstance()
                 val datePickerDialog = DatePickerDialog(
